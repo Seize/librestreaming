@@ -123,12 +123,12 @@ public class RESClient {
      * @param surfaceTexture to rendering preview
      */
     public void startPreview(SurfaceTexture surfaceTexture, int visualWidth, int visualHeight) {
-        videoClient.startPreview(surfaceTexture, visualWidth, visualHeight);
+        if (videoClient != null) videoClient.startPreview(surfaceTexture, visualWidth, visualHeight);
         LogTools.d("RESClient,startPreview()");
     }
 
     public void updatePreview(int visualWidth, int visualHeight) {
-        videoClient.updatePreview(visualWidth, visualHeight);
+        if (videoClient != null) videoClient.updatePreview(visualWidth, visualHeight);
         LogTools.d("RESClient,updatePreview()");
     }
 
@@ -137,7 +137,7 @@ public class RESClient {
      * @param releaseTexture true if you won`t reuse this surfaceTexture later
      */
     public void stopPreview(boolean releaseTexture) {
-        videoClient.stopPreview(releaseTexture);
+        if (videoClient != null) videoClient.stopPreview(releaseTexture);
         LogTools.d("RESClient,stopPreview()");
     }
 
