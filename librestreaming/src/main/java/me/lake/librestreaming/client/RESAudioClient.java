@@ -58,12 +58,14 @@ public class RESAudioClient {
 
     public boolean stop() {
         synchronized (syncOp) {
-            audioRecordThread.quit();
-            try {
-                audioRecordThread.join();
-            } catch (InterruptedException ignored) {
+            if (audioRecordThread != null) {
+                audioRecordThread.quit();
+                try {
+                    audioRecordThread.join();
+                } catch (InterruptedException ignored) {
+                }
+                softAudioCore.stop();
             }
-            softAudioCore.stop();
             audioRecordThread = null;
             audioRecord.stop();
             return true;
