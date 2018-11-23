@@ -3,6 +3,7 @@ package me.lake.librestreaming.client;
 
 import android.annotation.TargetApi;
 import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
 import android.os.Build;
 
 import me.lake.librestreaming.core.listener.RESConnectionListener;
@@ -35,6 +36,10 @@ public class RESClient {
         SyncOp = new Object();
         coreParameters = new RESCoreParameters();
         CallbackDelivery.i();
+    }
+
+    public Camera getCamera() {
+        return videoClient.getCamera();
     }
 
     /**

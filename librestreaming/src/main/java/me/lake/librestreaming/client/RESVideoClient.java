@@ -43,6 +43,10 @@ public class RESVideoClient {
         isPreviewing = false;
     }
 
+    public Camera getCamera() {
+        return camera;
+    }
+
     public boolean prepare(RESConfig resConfig) {
         synchronized (syncOp) {
             if ((cameraNum - 1) >= resConfig.getDefaultCamera()) {
@@ -230,7 +234,8 @@ public class RESVideoClient {
             camera.stopPreview();
             camera.release();
             camera = null;
-            if (null == (camera = createCamera(currentCameraIndex = (++currentCameraIndex) % cameraNum))) {
+            currentCameraIndex = currentCameraIndex == Camera.CameraInfo.CAMERA_FACING_BACK ? Camera.CameraInfo.CAMERA_FACING_FRONT : Camera.CameraInfo.CAMERA_FACING_BACK;
+            if (null == (camera = createCamera(currentCameraIndex))) {
                 LogTools.e("can not swap camera");
                 return false;
             }
